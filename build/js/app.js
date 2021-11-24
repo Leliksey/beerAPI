@@ -1,0 +1,100 @@
+/*
+ * ATTENTION: The "eval" devtool has been used (maybe by default in mode: "development").
+ * This devtool is neither made for production nor for readable output files.
+ * It uses "eval()" calls to create a separate source file in the browser devtools.
+ * If you are trying to read the output file, select a different devtool (https://webpack.js.org/configuration/devtool/)
+ * or disable the default devtool with "devtool: false".
+ * If you are looking for production-ready output files, see mode: "production" (https://webpack.js.org/configuration/mode/).
+ */
+/******/ (() => { // webpackBootstrap
+/******/ 	var __webpack_modules__ = ({
+
+/***/ "./assets/js/components/modal.js":
+/*!***************************************!*\
+  !*** ./assets/js/components/modal.js ***!
+  \***************************************/
+/***/ (() => {
+
+eval("// function sortAbv() {\n//             var items = document.querySelectorAll(\".dropdown-item\");\n//             var parent = document.querySelector(\".dropdown-list-show\");\n//             var SortElements = new Object();\n//             items.forEach(function (item, indx) {\n//               var itemValue = parseInt(\n//                 item\n//                   .querySelector(\".item__text\")\n//                   .textContent\n//                   .replace(/\\D/g,'')\n//               );\n//               SortElements[itemValue] = { element: item, index: indx };\n//             });\n//             var keys = Object.keys(SortElements);\n//             function compareNumeric(a, b) {\n//               a = parseInt(a);\n//               b = parseInt(b);\n//               if (a < b) return 1;\n//               if (a > b) return -1;\n//             }\n//             keys.sort(compareNumeric);\n//             keys.map(function (key, indx) {\n//                 parent.insertAdjacentElement(\n//                 \"beforeend\",\n//                 SortElements[key][\"element\"]\n//               );\n//             });\n//         }\n\n//# sourceURL=webpack://starterkit/./assets/js/components/modal.js?");
+
+/***/ }),
+
+/***/ "./assets/js/components/oneMoreScript.js":
+/*!***********************************************!*\
+  !*** ./assets/js/components/oneMoreScript.js ***!
+  \***********************************************/
+/***/ (() => {
+
+eval("window.onload = function () {\n  var dropdownListHide = document.querySelectorAll(\".dropdown-list-hide\");\n  var btn__container = document.querySelectorAll(\".btn__container\");\n  var btn = document.querySelector(\".btn-group\");\n  var dropdownMenuPizza = document.querySelector(\".dropdown-menu-pizza\");\n  var dropdownMenuSteak = document.querySelector(\".dropdown-menu-steak\");\n  var dropdownMenuAll = document.querySelector(\".dropdown-menu-all\");\n  var main__title = document.querySelector(\".main__title\");\n  var main__abv = document.querySelector(\".main__abv\");\n  var main__description = document.querySelector(\".main__description\");\n  var main__foodPairing = document.querySelector(\".main__food-pairing\");\n  var main__beerImg = document.querySelector(\".main__beer-img\");\n  var main__tagline = document.querySelector(\".main__tagline\");\n  var sortByNamePizza = document.querySelector(\".sortByNamePizza\");\n  var sortByNameSteak = document.querySelector(\".sortByNameSteak\");\n  var sortByNameAll = document.querySelector(\".sortByNameAll\");\n  var sortByAbvPizza = document.querySelector(\".sortByAbvPizza\");\n  var sortByAbvSteak = document.querySelector(\".sortByAbvSteak\");\n  var sortByAbvAll = document.querySelector(\".sortByAbvAll\");\n\n  function getData(e) {\n    e.preventDefault();\n\n    if (e.target.classList.contains(\"beerForPizza\")) {\n      dropdownListHide[0].classList.toggle(\"dropdown-list-show\");\n      btn__container[0].classList.toggle(\"btn__container__show\");\n\n      if (dropdownMenuPizza.hasChildNodes()) {\n        return;\n      }\n\n      fetch(\"https://api.punkapi.com/v2/beers?food=pizza&per_page=80\").then(response => {\n        return response.json();\n      }).then(data => {\n        for (var i = 0; i < data.length; i++) {\n          let name = data[i].name;\n          let description = data[i].description;\n          let foodPairing = data[i].food_pairing;\n          let abv = data[i].abv;\n          let img = data[i].image_url;\n          let tagline = data[i].tagline;\n          let newLi = document.createElement(\"li\");\n          newLi.innerHTML = \"<a href='#' class='item__text__pizza'>\" + name + \" \" + abv + \"%\" + \"<img src='\" + img + \"'>\" + \"</a>\";\n          newLi.classList.add(\"dropdown-item\");\n          newLi.classList.add(\"dropdown-item-pizza\");\n          dropdownMenuPizza.append(newLi);\n          newLi.addEventListener(\"click\", () => {\n            main__title.innerHTML = name;\n            main__abv.innerHTML = abv + \"%\";\n            main__description.innerHTML = description;\n            main__foodPairing.innerHTML = foodPairing;\n            main__beerImg.src = img;\n            main__tagline.innerHTML = tagline;\n          });\n        }\n\n        sortByNamePizza.addEventListener(\"click\", sortByName);\n        var sortByAbvPizza = document.querySelector(\".sortByAbvPizza\");\n        var toggle = false;\n        sortByAbvPizza.addEventListener('click', function () {\n          var items = document.querySelectorAll(\".dropdown-item-pizza\");\n          var parent = document.querySelector(\".dropdown-menu-pizza\");\n          var SortElements = new Object();\n          items.forEach(function (item, indx) {\n            var itemValue = parseInt(item.querySelector('.item__text__pizza').textContent.replace(/\\D/g, \"\"));\n            SortElements[itemValue] = {\n              'element': item,\n              'index': indx\n            };\n          });\n          var keys = Object.keys(SortElements);\n\n          function compareNumeric1(a, b) {\n            a = parseInt(a);\n            b = parseInt(b);\n            if (a < b) return 1;\n            if (a > b) return -1;\n          }\n\n          function compareNumeric2(a, b) {\n            a = parseInt(a);\n            b = parseInt(b);\n            if (a > b) return 1;\n            if (a < b) return -1;\n          }\n\n          if (toggle === false) {\n            keys.sort(compareNumeric1);\n            toggle = !toggle;\n          } else {\n            keys.sort(compareNumeric2);\n            toggle = !toggle;\n          }\n\n          keys.map(function (key, indx) {\n            parent.insertAdjacentElement('beforeend', SortElements[key]['element']);\n            SortElements[key]['index'] = indx;\n          });\n          return toggle;\n        }, toggle);\n      });\n    } else if (e.target.classList.contains(\"beerForSteak\")) {\n      dropdownListHide[1].classList.toggle(\"dropdown-list-show\");\n      btn__container[1].classList.toggle(\"btn__container__show\");\n\n      if (dropdownMenuSteak.hasChildNodes()) {\n        return;\n      }\n\n      fetch(\"https://api.punkapi.com/v2/beers?food=steak&per_page=80\").then(response => {\n        return response.json();\n      }).then(data => {\n        for (var i = 0; i < data.length; i++) {\n          let name = data[i].name;\n          let description = data[i].description;\n          let foodPairing = data[i].food_pairing;\n          let abv = data[i].abv;\n          let img = data[i].image_url;\n          let tagline = data[i].tagline;\n          let newLi = document.createElement(\"li\");\n          newLi.innerHTML = \"<a href='#' class='item__text__steak'>\" + name + \" \" + abv + \"%\" + \"<img src='\" + img + \"'>\" + \"</a>\";\n          newLi.classList.add(\"dropdown-item\");\n          newLi.classList.add(\"dropdown-item-steak\");\n          dropdownMenuSteak.append(newLi);\n          newLi.addEventListener(\"click\", () => {\n            main__title.innerHTML = name;\n            main__abv.innerHTML = abv + \"%\";\n            main__description.innerHTML = description;\n            main__foodPairing.innerHTML = foodPairing;\n            main__beerImg.src = img;\n            main__tagline.innerHTML = tagline;\n          });\n        }\n\n        sortByNameSteak.addEventListener(\"click\", sortByName);\n        var sortByAbvSteak = document.querySelector(\".sortByAbvSteak\");\n        var toggle = false;\n        sortByAbvSteak.addEventListener('click', function () {\n          var items = document.querySelectorAll(\".dropdown-item-steak\");\n          var parent = document.querySelector(\".dropdown-menu-steak\");\n          var SortElements = new Object();\n          items.forEach(function (item, indx) {\n            var itemValue = parseInt(item.querySelector('.item__text__steak').textContent.replace(/\\D/g, \"\"));\n            SortElements[itemValue] = {\n              'element': item,\n              'index': indx\n            };\n          });\n          var keys = Object.keys(SortElements);\n\n          function compareNumeric1(a, b) {\n            a = parseInt(a);\n            b = parseInt(b);\n            if (a < b) return 1;\n            if (a > b) return -1;\n          }\n\n          function compareNumeric2(a, b) {\n            a = parseInt(a);\n            b = parseInt(b);\n            if (a > b) return 1;\n            if (a < b) return -1;\n          }\n\n          if (toggle === false) {\n            keys.sort(compareNumeric1);\n            toggle = !toggle;\n          } else {\n            keys.sort(compareNumeric2);\n            toggle = !toggle;\n          }\n\n          keys.map(function (key, indx) {\n            parent.insertAdjacentElement('beforeend', SortElements[key]['element']);\n            SortElements[key]['index'] = indx;\n          });\n          return toggle;\n        }, toggle);\n      });\n    } else if (e.target.classList.contains(\"beerAll\")) {\n      dropdownListHide[2].classList.toggle(\"dropdown-list-show\");\n      btn__container[2].classList.toggle(\"btn__container__show\");\n\n      if (dropdownMenuAll.hasChildNodes()) {\n        return;\n      }\n\n      fetch(\"https://api.punkapi.com/v2/beers?per_page=80\").then(response => {\n        return response.json();\n      }).then(data => {\n        for (var i = 0; i < data.length; i++) {\n          let name = data[i].name;\n          let description = data[i].description;\n          let foodPairing = data[i].food_pairing;\n          let abv = data[i].abv;\n          let img = data[i].image_url;\n          let tagline = data[i].tagline;\n          let newLi = document.createElement(\"li\");\n          newLi.innerHTML = \"<a href='#' class='item__text__all'>\" + name + \" \" + abv + \"%\" + \"<img src='\" + img + \"' alt='beer'>\" + \"</a>\";\n          newLi.classList.add(\"dropdown-item\");\n          newLi.classList.add(\"dropdown-item-all\");\n          dropdownMenuAll.append(newLi);\n          newLi.addEventListener(\"click\", () => {\n            main__title.innerHTML = name;\n            main__abv.innerHTML = abv + \"%\";\n            main__description.innerHTML = description;\n            main__foodPairing.innerHTML = foodPairing;\n            main__beerImg.src = img;\n            main__tagline.innerHTML = tagline;\n          });\n        }\n\n        sortByNameAll.addEventListener(\"click\", sortByName);\n        var sortByAbvAll = document.querySelector(\".sortByAbvAll\");\n        var toggle = false;\n        sortByAbvAll.addEventListener('click', function () {\n          var items = document.querySelectorAll(\".dropdown-item-all\");\n          var parent = document.querySelector(\".dropdown-menu-all\");\n          var SortElements = new Object();\n          items.forEach(function (item, indx) {\n            var itemValue = parseInt(item.querySelector('.item__text__all').textContent.replace(/\\D/g, \"\"));\n            SortElements[itemValue] = {\n              'element': item,\n              'index': indx\n            };\n          });\n          var keys = Object.keys(SortElements);\n\n          function compareNumeric1(a, b) {\n            a = parseInt(a);\n            b = parseInt(b);\n            if (a < b) return 1;\n            if (a > b) return -1;\n          }\n\n          function compareNumeric2(a, b) {\n            a = parseInt(a);\n            b = parseInt(b);\n            if (a > b) return 1;\n            if (a < b) return -1;\n          }\n\n          if (toggle === false) {\n            keys.sort(compareNumeric1);\n            toggle = !toggle;\n          } else {\n            keys.sort(compareNumeric2);\n            toggle = !toggle;\n          }\n\n          keys.map(function (key, indx) {\n            parent.insertAdjacentElement('beforeend', SortElements[key]['element']);\n            SortElements[key]['index'] = indx;\n          });\n          return toggle;\n        }, toggle);\n      });\n    }\n  }\n\n  btn.addEventListener(\"click\", getData);\n\n  function sortByName(e) {\n    if (e.target.classList.contains(\"sortByNamePizza\")) {\n      var list,\n          i,\n          switching,\n          b,\n          shouldSwitch,\n          dir,\n          switchcount = 0;\n      list = document.querySelectorAll(\".dropdown-menu-pizza\");\n      switching = true;\n      dir = \"asc\";\n\n      while (switching) {\n        switching = false;\n\n        for (var i = 0; i < list.length; i++) {\n          b = list[i].querySelectorAll(\".dropdown-item\");\n\n          for (i = 0; i < b.length - 1; i++) {\n            shouldSwitch = false;\n\n            if (dir == \"asc\") {\n              if (b[i].innerHTML.toLowerCase() > b[i + 1].innerHTML.toLowerCase()) {\n                shouldSwitch = true;\n                break;\n              }\n            } else if (dir == \"desc\") {\n              if (b[i].innerHTML.toLowerCase() < b[i + 1].innerHTML.toLowerCase()) {\n                shouldSwitch = true;\n                break;\n              }\n            }\n          }\n\n          if (shouldSwitch) {\n            b[i].parentNode.insertBefore(b[i + 1], b[i]);\n            switching = true;\n            switchcount++;\n          } else {\n            if (switchcount == 0 && dir == \"asc\") {\n              dir = \"desc\";\n              switching = true;\n            }\n          }\n        }\n      }\n    } else if (e.target.classList.contains(\"sortByNameSteak\")) {\n      var list,\n          i,\n          switching,\n          b,\n          shouldSwitch,\n          dir,\n          switchcount = 0;\n      list = document.querySelectorAll(\".dropdown-menu-steak\");\n      switching = true;\n      dir = \"asc\";\n\n      while (switching) {\n        switching = false;\n\n        for (var i = 0; i < list.length; i++) {\n          b = list[i].querySelectorAll(\".dropdown-item\");\n\n          for (i = 0; i < b.length - 1; i++) {\n            shouldSwitch = false;\n\n            if (dir == \"asc\") {\n              if (b[i].innerHTML.toLowerCase() > b[i + 1].innerHTML.toLowerCase()) {\n                shouldSwitch = true;\n                break;\n              }\n            } else if (dir == \"desc\") {\n              if (b[i].innerHTML.toLowerCase() < b[i + 1].innerHTML.toLowerCase()) {\n                shouldSwitch = true;\n                break;\n              }\n            }\n          }\n\n          if (shouldSwitch) {\n            b[i].parentNode.insertBefore(b[i + 1], b[i]);\n            switching = true;\n            switchcount++;\n          } else {\n            if (switchcount == 0 && dir == \"asc\") {\n              dir = \"desc\";\n              switching = true;\n            }\n          }\n        }\n      }\n    } else if (e.target.classList.contains(\"sortByNameAll\")) {\n      var list,\n          i,\n          switching,\n          b,\n          shouldSwitch,\n          dir,\n          switchcount = 0;\n      list = document.querySelectorAll(\".dropdown-menu-all\");\n      switching = true;\n      dir = \"asc\";\n\n      while (switching) {\n        switching = false;\n\n        for (var i = 0; i < list.length; i++) {\n          b = list[i].querySelectorAll(\".dropdown-item\");\n\n          for (i = 0; i < b.length - 1; i++) {\n            shouldSwitch = false;\n\n            if (dir == \"asc\") {\n              if (b[i].innerHTML.toLowerCase() > b[i + 1].innerHTML.toLowerCase()) {\n                shouldSwitch = true;\n                break;\n              }\n            } else if (dir == \"desc\") {\n              if (b[i].innerHTML.toLowerCase() < b[i + 1].innerHTML.toLowerCase()) {\n                shouldSwitch = true;\n                break;\n              }\n            }\n          }\n\n          if (shouldSwitch) {\n            b[i].parentNode.insertBefore(b[i + 1], b[i]);\n            switching = true;\n            switchcount++;\n          } else {\n            if (switchcount == 0 && dir == \"asc\") {\n              dir = \"desc\";\n              switching = true;\n            }\n          }\n        }\n      }\n    }\n  }\n};\n\n//# sourceURL=webpack://starterkit/./assets/js/components/oneMoreScript.js?");
+
+/***/ }),
+
+/***/ "./assets/js/index.js":
+/*!****************************!*\
+  !*** ./assets/js/index.js ***!
+  \****************************/
+/***/ ((__unused_webpack_module, __unused_webpack_exports, __webpack_require__) => {
+
+eval("const oneMoreScript = __webpack_require__(/*! ./components/oneMoreScript.js */ \"./assets/js/components/oneMoreScript.js\");\n\nconst modal = __webpack_require__(/*! ./components/modal.js */ \"./assets/js/components/modal.js\");\n\n//# sourceURL=webpack://starterkit/./assets/js/index.js?");
+
+/***/ }),
+
+/***/ "./assets/scss/app.scss":
+/*!******************************!*\
+  !*** ./assets/scss/app.scss ***!
+  \******************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n// extracted by mini-css-extract-plugin\n\n\n//# sourceURL=webpack://starterkit/./assets/scss/app.scss?");
+
+/***/ })
+
+/******/ 	});
+/************************************************************************/
+/******/ 	// The module cache
+/******/ 	var __webpack_module_cache__ = {};
+/******/ 	
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+/******/ 		// Check if module is in cache
+/******/ 		var cachedModule = __webpack_module_cache__[moduleId];
+/******/ 		if (cachedModule !== undefined) {
+/******/ 			return cachedModule.exports;
+/******/ 		}
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = __webpack_module_cache__[moduleId] = {
+/******/ 			// no module.id needed
+/******/ 			// no module.loaded needed
+/******/ 			exports: {}
+/******/ 		};
+/******/ 	
+/******/ 		// Execute the module function
+/******/ 		__webpack_modules__[moduleId](module, module.exports, __webpack_require__);
+/******/ 	
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+/******/ 	
+/************************************************************************/
+/******/ 	/* webpack/runtime/make namespace object */
+/******/ 	(() => {
+/******/ 		// define __esModule on exports
+/******/ 		__webpack_require__.r = (exports) => {
+/******/ 			if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
+/******/ 				Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
+/******/ 			}
+/******/ 			Object.defineProperty(exports, '__esModule', { value: true });
+/******/ 		};
+/******/ 	})();
+/******/ 	
+/************************************************************************/
+/******/ 	
+/******/ 	// startup
+/******/ 	// Load entry module and return exports
+/******/ 	// This entry module can't be inlined because the eval devtool is used.
+/******/ 	__webpack_require__("./assets/js/index.js");
+/******/ 	var __webpack_exports__ = __webpack_require__("./assets/scss/app.scss");
+/******/ 	
+/******/ })()
+;
